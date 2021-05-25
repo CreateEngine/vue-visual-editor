@@ -7,14 +7,14 @@
 需要安装的依赖
 -------------
 
->"ant-design-vue": "^1.7.5", 
->"core-js": "^3.6.5", 
->"element-ui": "^2.15.1", 
->"html2canvas": "^1.0.0-rc.7", 
->"node-sass": "^4.14.1", 
->"sass-loader": "^7.1.0", 
->"vue": "^2.6.11", 
->"vuedraggable": "^2.24.3" 
+>"ant-design-vue": "^1.7.5",  
+>"core-js": "^3.6.5",  
+>"element-ui": "^2.15.1",  
+>"html2canvas": "^1.0.0-rc.7",  
+>"node-sass": "^4.14.1",  
+>"sass-loader": "^7.1.0",  
+>"vue": "^2.6.11",  
+>"vuedraggable": "^2.24.3"  
 
 **iconfont**字体库
 -----------------
