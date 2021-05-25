@@ -1,5 +1,7 @@
 export const category = {
   businessComponent: "业务组件",
+  functionalComponent: '功能组件',
+  basicComponent: '基础组件',
 };
 
 // 组件JSON数据结构
@@ -22,7 +24,34 @@ export const category = {
 //   datas:[]                           //  类型：Array, 组件渲染数据
 // },
 // }
-export const businessComponent = [
+
+export const businessComponent = [{
+  'icon': 'iconlunbo',
+  'name': 'Banner',
+  'options': {
+    'datas': [],
+  },
+}, {
+  'icon': 'icongonggao',
+  'name': 'Announcement',
+  'options': {
+    'datas': [],
+  },
+}, {
+  'icon': 'iconcaidan',
+  'name': 'FunctionMenu',
+  'options': {
+    'datas': [],
+  },
+}, {
+  'icon': 'iconliebiao',
+  'name': 'TabList',
+  'options': {
+    'datas': [],
+  },
+}];
+
+export const functionalComponent = [
   {
     icon: "iconliebiao",
     name: "ADatePicker",
@@ -39,7 +68,22 @@ export const businessComponent = [
   },
 ];
 
+export const basicComponent = [
+  {
+    icon: "iconliebiao",
+    name: "ADivider",
+    options: {
+      datas: [],
+    },
+  },
+];
+
 export const componentNameMap = {
-  ADatePicker:'日历',
-  APagination:'分页'
+  ADivider:'分割线',
+  ADatePicker: '日历',
+  APagination: '分页',
+  Banner: '轮播图',
+  Announcement: '公告',
+  FunctionMenu: '动态菜单组',
+  TabList: '帖子列表',
 };

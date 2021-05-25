@@ -8,13 +8,26 @@
   </div>
 </template>
 <script>
+import ADivider from './lists/basic/ADivider';
+
 import ADatePicker from './lists/ant/ADatePicker';
 import APagination from './lists/ant/APagination';
+
+import Banner from './lists/business/Banner';
+import Announcement from './lists/business/Announcement';
+import FunctionMenu from './lists/business/FunctionMenu';
+import TabList from './lists/business/TabList';
+
 export default {
   name: 'RenderItem',
   components: {
+    ADivider,
     ADatePicker,
-    APagination
+    APagination,
+    Banner,
+    Announcement,
+    FunctionMenu,
+    TabList
   },
   props: {
     item: {

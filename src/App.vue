@@ -24,13 +24,13 @@
   </div>
 </template>
 <script>
-import { editorConfig } from './config/editorConfig';
-import EditorHeader from './components/Layout/EditorHeader';
-import EditorContent from './components/Layout/EditorContent';
-import Tool from './components/Layout/Tool';
+import { editorConfig } from "./config/editorConfig";
+import EditorHeader from "./components/Layout/EditorHeader";
+import EditorContent from "./components/Layout/EditorContent";
+import Tool from "./components/Layout/Tool";
 
 export default {
-  name: 'Editor',
+  name: "Editor",
   components: {
     EditorHeader,
     EditorContent,
@@ -44,7 +44,7 @@ export default {
       historyList: [],
       editorConfig: editorConfig,
       historyMaxSteps: editorConfig.history.maxSteps,
-      SFRenderJson: 'SFEditorConfig',
+      SFRenderJson: "SFEditorConfig",
     };
   },
   mounted() {
@@ -53,25 +53,25 @@ export default {
   methods: {
     init() {
       this.addHistory();
-      if (this.$route.query.id) {
-        this.initData();
-        return;
-      }
+      // if (this.$route.query.id) {
+      //   this.initData();
+      //   return;
+      // }
     },
     initData() {
       this.editPage = {
-        name: 'demo',
-        id: '123',
+        name: "demo",
+        id: "123",
         renderJson: [
           {
-            category: 'businessComponent',
-            renderId: 'Banner-1620807374976',
-            name: 'Banner',
+            category: "businessComponent",
+            renderId: "Banner-1620807374976",
+            name: "Banner",
             options: {
               datas: [
-                '紧急通知：小区全体居民核酸检查',
-                '清新家园11月20日断水通知',
-                '垃圾分类，争做文明社区',
+                "紧急通知：小区全体居民核酸检查",
+                "清新家园11月20日断水通知",
+                "垃圾分类，争做文明社区",
               ],
             },
           },
@@ -93,10 +93,16 @@ export default {
         if (index === 0) {
           this.selectComponent = {};
         } else {
-          this.selectComponent = { ...this.canvasComponentList[index - 1], ...{ index: index - 1 }};
+          this.selectComponent = {
+            ...this.canvasComponentList[index - 1],
+            ...{ index: index - 1 },
+          };
         }
       } else {
-        this.selectComponent = { ...this.canvasComponentList[index + 1], ...{ index: index + 1 }};
+        this.selectComponent = {
+          ...this.canvasComponentList[index + 1],
+          ...{ index: index + 1 },
+        };
       }
       this.$nextTick(() => {
         this.canvasComponentList.splice(index, 1);
@@ -107,7 +113,7 @@ export default {
       const newItem = Object.assign({}, item);
       const tempItem = {};
       for (const key in newItem) {
-        if (key !== 'index') {
+        if (key !== "index") {
           tempItem[key] = newItem[key];
         }
       }
@@ -134,13 +140,16 @@ export default {
       console.log(this.historyList, historyItem);
     },
     useHistory(index) {
-      this.setComponentListNoHistory(JSON.parse(this.historyList[index].canvasComponentList));
-      this.setSelectComponentNoHistory(JSON.parse(this.historyList[index].selectComponent));
+      this.setComponentListNoHistory(
+        JSON.parse(this.historyList[index].canvasComponentList)
+      );
+      this.setSelectComponentNoHistory(
+        JSON.parse(this.historyList[index].selectComponent)
+      );
     },
   },
 };
 </script>
 <style scoped>
-@import './iconfont/iconfont.css';
+@import "./iconfont/iconfont.css";
 </style>
-
