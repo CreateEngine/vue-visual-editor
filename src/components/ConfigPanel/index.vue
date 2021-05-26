@@ -1,9 +1,18 @@
 <template>
   <div class="config-panel">
-    <div class="config-list">
+    <div class="config-tabs">
+      <el-tabs v-model="activeName">
+        <el-tab-pane label="属性" name="attr">属性</el-tab-pane>
+        <el-tab-pane label="事件" name="event">事件</el-tab-pane>
+        <el-tab-pane label="页面配置" name="page">
+          <page-config />
+        </el-tab-pane>
+      </el-tabs>
+    </div>
+    <!-- <div class="config-list">
       <div class="config-item">
         <div class="config-tab">
-          <div class="config-tab-item selected">组件属性</div>
+
         </div>
         <ul>
           <li class="disabled">
@@ -22,13 +31,18 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 
 <script>
+import PageConfig from './PageConfig';
+
 export default {
   name: 'ConfigPanel',
+  components: {
+    PageConfig,
+  },
   props: {
     selectComponent: {
       type: Object,
@@ -42,6 +56,11 @@ export default {
         return [];
       },
     },
+  },
+  data() {
+    return {
+      activeName: 'page',
+    };
   },
   methods: {
     changeData(event, index) {
@@ -64,14 +83,38 @@ export default {
 .config-panel {
   width: 250px;
   overflow: auto;
+  .config-tabs {
+    /deep/ .el-tabs__header {
+      margin: 0;
+    }
+    /deep/ .el-tabs__item {
+      padding: 0 10px;
+    }
+    /deep/ .el-collapse-item__header {
+      padding-left: 10px;
+      font-size: 14px;
+    }
+    /deep/ .config-tab-col {
+      display: flex;
+      justify-content: space-around;
+      padding: 10px;
+      .config-tab-col-title {
+        width: 60px;
+        font-size: 13px;
+      }
+      .config-tab-col-content {
+        flex: 1;
+        padding-left: 10px;
+      }
+    }
+  }
   .config-list {
     padding: 8px 0;
     width: 100%;
     .config-item {
       .config-tab {
         border-bottom: 2px solid #409eff;
-        display: flex;
-        justify-content: center;
+
         .config-tab-item {
           width: 50%;
           padding: 8px 12px;
