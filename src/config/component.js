@@ -1,7 +1,9 @@
+
+
 export const category = {
-  businessComponent: "业务组件",
-  functionalComponent: '功能组件',
-  basicComponent: '基础组件',
+  'basicComponent': '基础组件',
+  'functionalComponent': '功能组件',
+  'businessComponent': '业务组件',
 };
 
 // 组件JSON数据结构
@@ -24,7 +26,6 @@ export const category = {
 //   datas:[]                           //  类型：Array, 组件渲染数据
 // },
 // }
-
 export const businessComponent = [{
   'icon': 'iconlunbo',
   'name': 'Banner',
@@ -70,19 +71,122 @@ export const functionalComponent = [
 
 export const basicComponent = [
   {
-    icon: "iconliebiao",
-    name: "ADivider",
+    icon: 'iconwenzi',
+    name: 'MText',
     options: {
-      datas: [],
+      datas: '这是一段文字',
+      commonStyle: {
+        unit: 'px',
+        lineHeight: '1.4',
+        color: '#000000',
+        textAlign: 'center',
+      },
+    },
+  },
+  {
+    icon: 'icontupian',
+    name: 'MImage',
+    options: {
+      // FIXME（sf）默认图片 暂时放在服务器上
+      datas: 'https://appjavatest.linkdood.cn:10669/mqt-manager-center/api/static-files/upload/demo.png',
+      commonStyle: {
+        unit: 'px',
+        width: '',
+        height: '',
+        marginTop: '',
+        marginBottom: '',
+        marginLeft: '',
+        marginRight: '',
+        paddingTop: '',
+        paddingBottom: '',
+        paddingLeft: '',
+        paddingRight: '',
+        fontFamily: '',
+        fontUnit: '',
+        fontSize: '',
+        fontWeight: '',
+        lineHeight: '1',
+        color: '#000000',
+        textAlign: '',
+      },
+    },
+  },
+  {
+    icon: 'iconanniu',
+    name: 'MButton',
+    options: {
+      datas: '按钮',
+      commonStyle: {
+        unit: 'px',
+        width: '',
+        height: '80',
+        backgroundColor: '#ffffff',
+        lineHeight: '4',
+        borderWidth: '1',
+        borderStyle: 'solid',
+        borderColor: '#333333',
+        borderRadius: '20',
+        color: '#000000',
+        textAlign: 'center',
+      },
+    },
+  },
+  {
+    icon: 'iconfengexian',
+    name: 'MDivider',
+    options: {
+      datas: '',
+      commonStyle: {
+        unit: 'px',
+        width: '',
+        height: '1',
+        marginTop: '5',
+        marginBottom: '5',
+        borderWidth: '1',
+        borderStyle: 'solid',
+        borderColor: '#333333',
+      },
+    },
+  },
+  {
+    icon: 'iconlunbo',
+    name: 'MSlider',
+    options: {
+      // FIXME（sf）默认图片 暂时放在服务器上
+      datas: [{ url: 'https://appjavatest.linkdood.cn:10669/mqt-manager-center/api/static-files/upload/demo.png', link: '' }],
+      commonStyle: {
+        unit: 'px',
+        width: '',
+        height: '',
+        marginTop: '',
+        marginBottom: '',
+        marginLeft: '',
+        marginRight: '',
+        paddingTop: '',
+        paddingBottom: '',
+        paddingLeft: '',
+        paddingRight: '',
+        fontFamily: '',
+        fontUnit: '',
+        fontSize: '',
+        fontWeight: '',
+        lineHeight: '1',
+        color: '#000000',
+        textAlign: '',
+      },
     },
   },
 ];
 
 export const componentNameMap = {
-  ADivider:'分割线',
+  MText: '文字',
+  MImage: '图片',
+  MButton: '按钮',
+  MDivider: '分割线',
+  MSlider: '图片轮播',
   ADatePicker: '日历',
   APagination: '分页',
-  Banner: '轮播图',
+  Banner: '轮播',
   Announcement: '公告',
   FunctionMenu: '动态菜单组',
   TabList: '帖子列表',

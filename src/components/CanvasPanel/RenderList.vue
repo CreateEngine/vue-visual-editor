@@ -46,31 +46,22 @@
   </div>
 </template>
 <script>
+import { mapGetters, mapMutations } from 'vuex';
 import draggable from 'vuedraggable';
 import RenderItem from './RenderItem';
+
 export default {
   name: 'CanvasComponent',
   components: {
     draggable,
     RenderItem,
   },
-  props: {
-    selectComponent: {
-      type: Object,
-      default: () => {
-        return {};
-      },
-    },
-    canvasComponentList: {
-      type: Array,
-      default: () => {
-        return [];
-      },
-    },
+  computed: {
+    ...mapGetters(['selectComponent', 'canvasComponentList', 'historyList']),
   },
   methods: {
     deleteComponentList(index) {
-      this.$emit('deleteComponentList', index);
+      this.DELETECOMPONENT(index);
     },
     changeComponentList(evt) {
       if (evt.added) {
@@ -85,10 +76,11 @@ export default {
           ...{ index: evt.moved.newIndex },
         });
       }
-      console.log(evt);
     },
+    ...mapMutations('editor', ['SET_SELECTCOMPONENT', 'DELETECOMPONENT', 'ADDHISTORY']),
     setSelectComponent(item) {
-      this.$emit('setSelectComponent', item);
+      this.SET_SELECTCOMPONENT(item);
+      this.ADDHISTORY();
     },
   },
 };
@@ -114,7 +106,7 @@ export default {
       background: #f2f2f2;
       border: 1px dashed #999;
       margin: 10px;
-      min-height: calc(100vh - 140px);
+      min-height: calc(100vh - 130px);
     }
   }
 

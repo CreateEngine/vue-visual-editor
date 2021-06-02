@@ -4,35 +4,53 @@
       :is="item.name"
       ref="renderComponent"
       :item="item"
+      :style="commonStyle"
+      style="max-width:100%;"
+      :type="type"
+      @click.native="supportEvents"
     />
   </div>
 </template>
 <script>
-import ADivider from './lists/basic/ADivider';
-
-import ADatePicker from './lists/ant/ADatePicker';
-import APagination from './lists/ant/APagination';
-
 import Banner from './lists/business/Banner';
 import Announcement from './lists/business/Announcement';
 import FunctionMenu from './lists/business/FunctionMenu';
 import TabList from './lists/business/TabList';
+import MDivider from './lists/basic/MDivider';
+import MText from './lists/basic/MText';
+import MImage from './lists/basic/MImage';
+import MButton from './lists/basic/MButton';
+import MSlider from './lists/basic/MSlider';
 
 export default {
   name: 'RenderItem',
   components: {
-    ADivider,
-    ADatePicker,
-    APagination,
     Banner,
     Announcement,
     FunctionMenu,
-    TabList
+    TabList,
+    MDivider,
+    MText,
+    MImage,
+    MButton,
+    MSlider,
   },
   props: {
+    type: {
+      type: String,
+      default: () => {
+        return 'canvas';
+      },
+    },
     item: {
       type: Object,
       required: true,
+    },
+    support: {
+      type: Array,
+      default: () => {
+        return [];
+      },
     },
   },
   data() {
@@ -47,6 +65,84 @@ export default {
         zoom: this.scale,
       };
     },
+    commonStyle() {
+      const commonStyle = Object.assign({}, this.item.options.commonStyle);
+      let unitScale = 1;
+      if (this.type === 'preview') {
+        commonStyle.unit = 'vw';
+        unitScale = 1 / 7.5;
+      }
+      // 宽高
+      commonStyle.width = commonStyle.width
+        ? commonStyle.width * unitScale + commonStyle.unit
+        : '';
+      commonStyle.height = commonStyle.height
+        ? commonStyle.height * unitScale + commonStyle.unit
+        : '';
+      // 外边距
+      commonStyle.marginTop = commonStyle.marginTop
+        ? commonStyle.marginTop * unitScale + commonStyle.unit
+        : '';
+      commonStyle.marginBottom = commonStyle.marginBottom
+        ? commonStyle.marginBottom * unitScale + commonStyle.unit
+        : '';
+      commonStyle.marginLeft = commonStyle.marginLeft
+        ? commonStyle.marginLeft * unitScale + commonStyle.unit
+        : '';
+      commonStyle.marginRight = commonStyle.marginRight
+        ? commonStyle.marginRight * unitScale + commonStyle.unit
+        : '';
+      // 内边距
+      commonStyle.paddingTop = commonStyle.paddingTop
+        ? commonStyle.paddingTop * unitScale + commonStyle.unit
+        : '';
+      commonStyle.paddingBottom = commonStyle.paddingBottom
+        ? commonStyle.paddingBottom * unitScale + commonStyle.unit
+        : '';
+      commonStyle.paddingLeft = commonStyle.paddingLeft
+        ? commonStyle.paddingLeft * unitScale + commonStyle.unit
+        : '';
+      commonStyle.paddingRight = commonStyle.paddingRight
+        ? commonStyle.paddingRight * unitScale + commonStyle.unit
+        : '';
+      // 边框
+      commonStyle.borderWidth = commonStyle.borderWidth
+        ? commonStyle.borderWidth * unitScale + commonStyle.unit
+        : '';
+      commonStyle.borderRadius = commonStyle.borderRadius
+        ? commonStyle.borderRadius * unitScale + commonStyle.unit
+        : '';
+      // 阴影
+      commonStyle.hShadow = commonStyle.hShadow
+        ? commonStyle.hShadow * unitScale + commonStyle.unit
+        : '';
+      commonStyle.vShadow = commonStyle.vShadow
+        ? commonStyle.vShadow * unitScale + commonStyle.unit
+        : '';
+      commonStyle.blurShadow = commonStyle.blurShadow
+        ? commonStyle.blurShadow * unitScale + commonStyle.unit
+        : '';
+      commonStyle.spreadShadow = commonStyle.spreadShadow
+        ? commonStyle.spreadShadow * unitScale + commonStyle.unit
+        : '';
+      commonStyle.boxShadow =
+        commonStyle.hShadow +
+        ' ' +
+        commonStyle.vShadow +
+        ' ' +
+        commonStyle.blurShadow +
+        ' ' +
+        commonStyle.spreadShadow +
+        ' ' +
+        commonStyle.colorShadow;
+      // 字体
+      commonStyle.fontSize = commonStyle.fontSize
+        ? commonStyle.fontSize * unitScale + commonStyle.unit
+        : '';
+      // 背景图
+      commonStyle.backgroundImage = `url(${commonStyle.backgroundImage})`;
+      return commonStyle;
+    },
   },
   mounted() {
     this.setScale();
@@ -60,6 +156,27 @@ export default {
     },
     observerBoxSize() {
       window.addEventListener('resize', this.setScale, false);
+    },
+    supportEvents() {
+      // TODO 目前只支持跳转链接事件
+      if (this.support.includes('events')) {
+        let isPreventComponentEvent = false;
+        // 轮播图事件阻止
+        if (this.item.name === 'MSlider') {
+          this.item.options.datas.forEach(item => {
+            if (item.link) {
+              isPreventComponentEvent = true;
+            }
+          });
+        }
+        if (isPreventComponentEvent) {
+          return;
+        }
+        const url = this.item.events && this.item.events[0].url;
+        if (url) {
+          window.location.href = url;
+        }
+      }
     },
   },
 };

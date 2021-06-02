@@ -1,29 +1,10 @@
 <template>
   <div>
     <div class="config-tab-col">
-      <div class="config-tab-col-title">选择单位:</div>
-      <div class="config-tab-col-content">
-        <el-select
-          style="width:130px;"
-          :value="globalConfig.style.marginUnit"
-          placeholder="请选择单位"
-          size="mini"
-          @change="setStyleConfig($event, 'marginUnit')"
-        >
-          <el-option
-            v-for="item in options"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value"
-          />
-        </el-select>
-      </div>
-    </div>
-    <div class="config-tab-col">
       <div class="config-tab-col-title">外上边距:</div>
       <div class="config-tab-col-content">
         <el-input-number
-          :value="globalConfig.style.marginTop"
+          :value="componentStyle.marginTop"
           size="mini"
           controls-position="right"
           :min="0"
@@ -35,7 +16,7 @@
       <div class="config-tab-col-title">外下边距:</div>
       <div class="config-tab-col-content">
         <el-input-number
-          :value="globalConfig.style.marginBottom"
+          :value="componentStyle.marginBottom"
           size="mini"
           controls-position="right"
           :min="0"
@@ -47,7 +28,7 @@
       <div class="config-tab-col-title">外左边距:</div>
       <div class="config-tab-col-content">
         <el-input-number
-          :value="globalConfig.style.marginLeft"
+          :value="componentStyle.marginLeft"
           size="mini"
           controls-position="right"
           :min="0"
@@ -59,7 +40,7 @@
       <div class="config-tab-col-title">外右边距:</div>
       <div class="config-tab-col-content">
         <el-input-number
-          :value="globalConfig.style.marginRight"
+          :value="componentStyle.marginRight"
           size="mini"
           controls-position="right"
           :min="0"
@@ -71,7 +52,7 @@
       <div class="config-tab-col-title">内上边距:</div>
       <div class="config-tab-col-content">
         <el-input-number
-          :value="globalConfig.style.paddingTop"
+          :value="componentStyle.paddingTop"
           size="mini"
           controls-position="right"
           :min="0"
@@ -83,7 +64,7 @@
       <div class="config-tab-col-title">内下边距:</div>
       <div class="config-tab-col-content">
         <el-input-number
-          :value="globalConfig.style.paddingBottom"
+          :value="componentStyle.paddingBottom"
           size="mini"
           controls-position="right"
           :min="0"
@@ -95,7 +76,7 @@
       <div class="config-tab-col-title">内左边距:</div>
       <div class="config-tab-col-content">
         <el-input-number
-          :value="globalConfig.style.paddingLeft"
+          :value="componentStyle.paddingLeft"
           size="mini"
           controls-position="right"
           :min="0"
@@ -107,7 +88,7 @@
       <div class="config-tab-col-title">内右边距:</div>
       <div class="config-tab-col-content">
         <el-input-number
-          :value="globalConfig.style.paddingRight"
+          :value="componentStyle.paddingRight"
           size="mini"
           controls-position="right"
           :min="0"
@@ -122,21 +103,12 @@
 export default {
   name: 'MarginPaddingConfig',
   props: {
-    globalConfig: {
+    componentStyle: {
       type: Object,
       default: () => {
         return {};
       },
     },
-  },
-  data() {
-    return {
-      options: [
-        { value: 'px', label: 'px' },
-        { value: 'vw', label: 'vw' },
-        { value: '%', label: '%' },
-      ],
-    };
   },
   methods: {
     setStyleConfig(val, key) {

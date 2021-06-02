@@ -3,14 +3,10 @@
     <component-panel :canvas-component-list="canvasComponentList" />
     <canvas-panel
       :canvas-component-list="canvasComponentList"
-      :select-component="selectComponent"
-      @setSelectComponent="setSelectComponent"
       @deleteComponentList="deleteComponentList"
     />
     <config-panel
       :canvas-component-list="canvasComponentList"
-      :select-component="selectComponent"
-      @setSelectComponentNoHistory="setSelectComponentNoHistory"
       @modifyComponentList="modifyComponentList"
     />
   </div>
@@ -35,20 +31,8 @@ export default {
         return [];
       },
     },
-    selectComponent: {
-      type: Object,
-      default: () => {
-        return {};
-      },
-    },
   },
   methods: {
-    setSelectComponent(item) {
-      this.$emit('setSelectComponent', item);
-    },
-    setSelectComponentNoHistory(item) {
-      this.$emit('setSelectComponentNoHistory', item);
-    },
     modifyComponentList(index, newItem) {
       this.$emit('modifyComponentList', index, newItem);
     },

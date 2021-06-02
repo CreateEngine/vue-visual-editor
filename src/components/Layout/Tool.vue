@@ -70,18 +70,6 @@ export default {
         return {};
       },
     },
-    canvasComponentList: {
-      type: Array,
-      default: () => {
-        return [];
-      },
-    },
-    selectComponent: {
-      type: Object,
-      default: () => {
-        return {};
-      },
-    },
   },
   data() {
     return {

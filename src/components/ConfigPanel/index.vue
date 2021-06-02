@@ -2,86 +2,46 @@
   <div class="config-panel">
     <div class="config-tabs">
       <el-tabs v-model="activeName">
-        <el-tab-pane label="属性" name="attr">属性</el-tab-pane>
-        <el-tab-pane label="事件" name="event">事件</el-tab-pane>
+        <el-tab-pane label="属性" name="attr">
+          <component-attr />
+          <common-style />
+        </el-tab-pane>
+        <el-tab-pane label="事件" name="event">
+          <event-config />
+        </el-tab-pane>
         <el-tab-pane label="页面配置" name="page">
           <page-config />
         </el-tab-pane>
       </el-tabs>
     </div>
-    <!-- <div class="config-list">
-      <div class="config-item">
-        <div class="config-tab">
-
-        </div>
-        <ul>
-          <li class="disabled">
-            业务组件不可配置
-          </li>
-        </ul>
-        <div class="config-data">
-          组件data属性:<br>
-          <div v-if="selectComponent.options && selectComponent.options.datas">
-            <div
-              v-for="(item, index) in selectComponent.options.datas"
-              :key="index"
-            >
-              <el-input :value="item" @input="changeData($event, index)" />
-            </div>
-          </div>
-        </div>
-      </div>
-    </div> -->
   </div>
 </template>
 
 <script>
 import PageConfig from './PageConfig';
+import CommonStyle from './CommonStyle';
+import ComponentAttr from './ComponentAttr';
+import EventConfig from './EventConfig';
 
 export default {
   name: 'ConfigPanel',
   components: {
     PageConfig,
-  },
-  props: {
-    selectComponent: {
-      type: Object,
-      default: () => {
-        return {};
-      },
-    },
-    canvasComponentList: {
-      type: Array,
-      default: () => {
-        return [];
-      },
-    },
+    CommonStyle,
+    ComponentAttr,
+    EventConfig,
   },
   data() {
     return {
       activeName: 'page',
     };
   },
-  methods: {
-    changeData(event, index) {
-      const tempSelectComponent = Object.assign({}, this.selectComponent);
-      tempSelectComponent.options.datas[index] = event;
-      this.setSelectComponentNoHistory(tempSelectComponent);
-      this.modifyComponentList(tempSelectComponent);
-    },
-    setSelectComponentNoHistory(item) {
-      this.$emit('setSelectComponentNoHistory', item);
-    },
-    modifyComponentList(newItem) {
-      this.$emit('modifyComponentList', newItem);
-    },
-  },
 };
 </script>
 
 <style lang="scss" scoped>
 .config-panel {
-  width: 250px;
+  width: 300px;
   overflow: auto;
   .config-tabs {
     /deep/ .el-tabs__header {

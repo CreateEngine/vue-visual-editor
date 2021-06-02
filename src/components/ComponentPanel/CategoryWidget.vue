@@ -19,6 +19,7 @@
   </div>
 </template>
 <script>
+import { mapGetters } from 'vuex';
 import Draggable from 'vuedraggable';
 import { category } from '../../config/component.js';
 
@@ -31,12 +32,6 @@ export default {
     datas: {
       type: Array,
       required: true,
-    },
-    canvasComponentList: {
-      type: Array,
-      default: () => {
-        return [];
-      },
     },
     category: {
       type: String,
@@ -57,34 +52,40 @@ export default {
     categoryTitle() {
       return category[this.category];
     },
+    ...mapGetters(['canvasComponentList']),
   },
   methods: {
     handleMoveEnd(evt) {
       console.log('end', evt, this.canvasComponentList);
-      // if (this.isClone === false) {
-      //   this.$message.error('组件已存在，不可重复拖拽！');
-      //   this.isClone = true;
-      // }
+      if (this.isClone === false) {
+        this.$message.error('业务组件不可重复拖拽！');
+        this.isClone = true;
+      }
     },
     handleMoveStart({ oldIndex }) {
       this.selectDragComponent = this.datas[oldIndex];
     },
     handleMove() {
-      // this.canvasComponentList.forEach(item => {
-      //   if (item.name === this.selectDragComponent.name) {
-      //     this.isClone = false;
-      //   }
-      // });
+      this.canvasComponentList.forEach(item => {
+        if (
+          item.name === this.selectDragComponent.name &&
+          item.category === 'businessComponent'
+        ) {
+          this.isClone = false;
+        }
+      });
       return this.isClone;
     },
     cloneComponent(item) {
-      return {
-        ...item,
-        ...{
-          category: this.category,
-          renderId: item.name + '-' + Date.now(),
-        },
-      };
+      return JSON.parse(
+        JSON.stringify({
+          ...item,
+          ...{
+            category: this.category,
+            renderId: item.name + '-' + Date.now(),
+          },
+        })
+      );
     },
   },
 };
