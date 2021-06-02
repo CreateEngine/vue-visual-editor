@@ -12,6 +12,10 @@ export const constantRoutes = [
     path: '/preview-page',
     component: () => import('@/components/CanvasPanel/PreviewPage/PreviewPage.vue'),
   },
+  {
+    path: '/',
+    component: () => import('@/index.vue'),
+  },
 ];
 
 
