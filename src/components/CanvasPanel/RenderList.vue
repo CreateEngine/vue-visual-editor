@@ -21,7 +21,10 @@
           v-for="(element, index) in canvasComponentList"
           :key="element.renderId"
           class="darg-item"
-          :class="{ active: selectComponent.renderId === element.renderId }"
+          :class="{
+            active: selectComponent.renderId === element.renderId,
+            'component-grid': selectComponent.category === 'layoutComponent',
+          }"
           @click="setSelectComponent({ ...element, ...{ index: index } })"
         >
           <render-item :item="element" />
@@ -46,18 +49,18 @@
   </div>
 </template>
 <script>
-import { mapGetters, mapMutations } from 'vuex';
-import draggable from 'vuedraggable';
-import RenderItem from './RenderItem';
+import { mapGetters, mapMutations } from "vuex";
+import draggable from "vuedraggable";
+import RenderItem from "./RenderItem";
 
 export default {
-  name: 'CanvasComponent',
+  name: "CanvasComponent",
   components: {
     draggable,
     RenderItem,
   },
   computed: {
-    ...mapGetters(['selectComponent', 'canvasComponentList', 'historyList']),
+    ...mapGetters(["selectComponent", "canvasComponentList", "historyList"]),
   },
   methods: {
     deleteComponentList(index) {
@@ -77,7 +80,11 @@ export default {
         });
       }
     },
-    ...mapMutations('editor', ['SET_SELECTCOMPONENT', 'DELETECOMPONENT', 'ADDHISTORY']),
+    ...mapMutations("editor", [
+      "SET_SELECTCOMPONENT",
+      "DELETECOMPONENT",
+      "ADDHISTORY",
+    ]),
     setSelectComponent(item) {
       this.SET_SELECTCOMPONENT(item);
       this.ADDHISTORY();
@@ -132,7 +139,7 @@ export default {
       height: 3px;
       box-sizing: border-box;
       font-size: 0;
-      content: '';
+      content: "";
       overflow: hidden;
       padding: 0;
     }
@@ -167,6 +174,23 @@ export default {
         margin: 0 5px;
         cursor: pointer;
         cursor: move;
+      }
+    }
+    &.component-grid {
+      &.active {
+        outline: 2px solid #e6a23c;
+        border: 1px solid #e6a23c;
+      }
+      &:hover {
+        background: #ecf5ff;
+        outline: 1px solid #e6a23c;
+        outline-offset: 0px;
+      }
+      .component-view-action {
+        background: #e6a23c;
+      }
+      .component-view-drag {
+        background: #e6a23c;
       }
     }
   }

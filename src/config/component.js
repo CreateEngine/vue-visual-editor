@@ -4,6 +4,7 @@ export const category = {
   'basicComponent': '基础组件',
   'functionalComponent': '功能组件',
   'businessComponent': '业务组件',
+  'layoutComponent':'布局组件'
 };
 
 // 组件JSON数据结构
@@ -178,6 +179,15 @@ export const basicComponent = [
   },
 ];
 
+export const layoutComponent = [
+  {
+    icon: "iconliebiao",
+    name: "LGrid",
+    options: {
+      datas: [],
+    },
+  },
+];
 export const componentNameMap = {
   MText: '文字',
   MImage: '图片',
@@ -190,4 +200,5 @@ export const componentNameMap = {
   Announcement: '公告',
   FunctionMenu: '动态菜单组',
   TabList: '帖子列表',
+  LGrid:'栅格布局'
 };

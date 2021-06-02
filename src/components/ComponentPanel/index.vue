@@ -7,7 +7,7 @@
         :component-name-map="componentNameMap"
         category="basicComponent"
       />
-            <category-widget
+      <category-widget
         :datas="functionalComponent"
         :canvas-component-list="canvasComponentList"
         :component-name-map="componentNameMap"
@@ -19,15 +19,27 @@
         :component-name-map="componentNameMap"
         category="businessComponent"
       />
+       <category-widget
+        :datas="layoutComponent"
+        :canvas-component-list="canvasComponentList"
+        :component-name-map="componentNameMap"
+        category="layoutComponent"
+      />
     </div>
   </div>
 </template>
 <script>
-import {  basicComponent,functionalComponent, businessComponent, componentNameMap } from '../../config/component.js';
-import CategoryWidget from './CategoryWidget.vue';
+import {
+  basicComponent,
+  functionalComponent,
+  businessComponent,
+  layoutComponent,
+  componentNameMap,
+} from "../../config/component.js";
+import CategoryWidget from "./CategoryWidget.vue";
 
 export default {
-  name: 'ComponentPanel',
+  name: "ComponentPanel",
   components: {
     CategoryWidget,
   },
@@ -44,6 +56,7 @@ export default {
       basicComponent,
       functionalComponent,
       businessComponent,
+      layoutComponent,
       componentNameMap,
     };
   },

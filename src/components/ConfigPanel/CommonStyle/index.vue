@@ -2,7 +2,7 @@
   <div
     v-if="
       selectComponent.options &&
-        selectComponent.category !== 'businessComponent'
+       !['businessComponent','layoutComponent'].includes(selectComponent.category)
     "
   >
     <div class="config-title">基础样式</div>

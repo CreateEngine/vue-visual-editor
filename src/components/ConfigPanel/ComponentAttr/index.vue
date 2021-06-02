@@ -21,6 +21,7 @@ import MImage from './MImage';
 import MButton from './MButton';
 import MDivider from './MDivider';
 import MSlider from './MSlider';
+import LGrid from './Layout/LGrid';
 
 export default {
   name: 'ComponentAttr',
@@ -30,6 +31,7 @@ export default {
     MButton,
     MDivider,
     MSlider,
+    LGrid
   },
   computed: {
     ...mapGetters(['selectComponent']),
