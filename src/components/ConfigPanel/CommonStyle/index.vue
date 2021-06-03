@@ -1,10 +1,5 @@
 <template>
-  <div
-    v-if="
-      selectComponent.options &&
-       !['businessComponent','layoutComponent'].includes(selectComponent.category)
-    "
-  >
+  <div>
     <div class="config-title">基础样式</div>
     <el-collapse class="page-config">
       <el-collapse-item title="尺寸配置" name="size">

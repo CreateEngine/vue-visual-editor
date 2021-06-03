@@ -1,6 +1,6 @@
 export const globalConfig = {
   style: {
-    backgroundColor: '#ffffff',
+    backgroundColor: '',
     backgroundImage: '',
     marginUnit: '',
     marginTop: '',
@@ -21,3 +21,4 @@ export const globalConfig = {
     },
   },
 };
+

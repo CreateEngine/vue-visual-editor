@@ -4,7 +4,7 @@ export const category = {
   'basicComponent': '基础组件',
   'functionalComponent': '功能组件',
   'businessComponent': '业务组件',
-  'layoutComponent':'布局组件'
+  'layoutComponent': '布局组件'
 };
 
 // 组件JSON数据结构
@@ -92,23 +92,6 @@ export const basicComponent = [
       datas: 'https://appjavatest.linkdood.cn:10669/mqt-manager-center/api/static-files/upload/demo.png',
       commonStyle: {
         unit: 'px',
-        width: '',
-        height: '',
-        marginTop: '',
-        marginBottom: '',
-        marginLeft: '',
-        marginRight: '',
-        paddingTop: '',
-        paddingBottom: '',
-        paddingLeft: '',
-        paddingRight: '',
-        fontFamily: '',
-        fontUnit: '',
-        fontSize: '',
-        fontWeight: '',
-        lineHeight: '1',
-        color: '#000000',
-        textAlign: '',
       },
     },
   },
@@ -119,14 +102,15 @@ export const basicComponent = [
       datas: '按钮',
       commonStyle: {
         unit: 'px',
-        width: '',
-        height: '80',
+        width: '140',
+        height: '40',
         backgroundColor: '#ffffff',
         lineHeight: '4',
         borderWidth: '1',
         borderStyle: 'solid',
         borderColor: '#333333',
-        borderRadius: '20',
+        borderRadius: '5',
+        fontSize: '14',
         color: '#000000',
         textAlign: 'center',
       },
@@ -157,23 +141,7 @@ export const basicComponent = [
       datas: [{ url: 'https://appjavatest.linkdood.cn:10669/mqt-manager-center/api/static-files/upload/demo.png', link: '' }],
       commonStyle: {
         unit: 'px',
-        width: '',
-        height: '',
-        marginTop: '',
-        marginBottom: '',
-        marginLeft: '',
-        marginRight: '',
-        paddingTop: '',
-        paddingBottom: '',
-        paddingLeft: '',
-        paddingRight: '',
-        fontFamily: '',
-        fontUnit: '',
-        fontSize: '',
-        fontWeight: '',
-        lineHeight: '1',
         color: '#000000',
-        textAlign: '',
       },
     },
   },
@@ -188,6 +156,7 @@ export const layoutComponent = [
     },
   },
 ];
+
 export const componentNameMap = {
   MText: '文字',
   MImage: '图片',
@@ -200,5 +169,5 @@ export const componentNameMap = {
   Announcement: '公告',
   FunctionMenu: '动态菜单组',
   TabList: '帖子列表',
-  LGrid:'栅格布局'
+  LGrid: '栅格布局'
 };

@@ -2,7 +2,7 @@
   <div class="component-attr">
     <div class="component-attr-item">
       <div class="item-title" style="color:#666666;">
-        暂无组件属性项
+         暂无配置项
       </div>
     </div>
   </div>

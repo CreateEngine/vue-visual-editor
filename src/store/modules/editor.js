@@ -8,7 +8,7 @@ const state = {
   ],
   globalConfig: {
     style: {
-      backgroundColor: '#ffffff',
+      backgroundColor: '',
       backgroundImage: '',
     },
   },

@@ -8,11 +8,10 @@
   </div>
 </template>
 <script>
-
-import RenderList from './RenderList.vue';
+import RenderList from "./RenderList.vue";
 
 export default {
-  name: 'CanvasPanel',
+  name: "CanvasPanel",
   components: {
     RenderList,
   },
@@ -26,7 +25,7 @@ export default {
   },
   methods: {
     deleteComponentList(index) {
-      this.$emit('deleteComponentList', index);
+      this.$emit("deleteComponentList", index);
     },
   },
 };

@@ -32,7 +32,7 @@
 
 <script>
 export default {
-  name: 'MText',
+  name: 'MImage',
   props: {
     item: {
       type: Object,

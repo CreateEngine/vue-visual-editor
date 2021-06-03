@@ -1,10 +1,5 @@
 <template>
-  <div
-    v-if="
-      selectComponent.options &&
-        selectComponent.category !== 'businessComponent'
-    "
-  >
+  <div>
     <div class="config-title">组件属性</div>
     <component
       :is="selectComponent.name"

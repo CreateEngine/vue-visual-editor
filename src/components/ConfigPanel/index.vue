@@ -3,11 +3,44 @@
     <div class="config-tabs">
       <el-tabs v-model="activeName">
         <el-tab-pane label="属性" name="attr">
-          <component-attr />
-          <common-style />
+          <div v-if="!selectComponent.category" class="config-tip">
+            请选择需要配置的组件
+          </div>
+          <div
+            v-if="['businessComponent','layoutComponent'].includes(selectComponent.category)"
+            class="config-tip"
+          >
+            目前组件不支持属性修改
+          </div>
+          <component-attr
+            v-if="
+              selectComponent.category &&
+                !['businessComponent','layoutComponent'].includes(selectComponent.category)
+            "
+          />
+          <common-style
+            v-if="
+              selectComponent.category &&
+                !['businessComponent','layoutComponent'].includes(selectComponent.category)
+            "
+          />
         </el-tab-pane>
         <el-tab-pane label="事件" name="event">
-          <event-config />
+          <div v-if="!selectComponent.category" class="config-tip">
+            请选择需要绑定事件的组件
+          </div>
+          <div
+            v-if="['businessComponent','layoutComponent'].includes(selectComponent.category)"
+            class="config-tip"
+          >
+            目前组件不支持事件绑定
+          </div>
+          <event-config
+            v-if="
+              selectComponent.category &&
+                !['businessComponent','layoutComponent'].includes(selectComponent.category)
+            "
+          />
         </el-tab-pane>
         <el-tab-pane label="页面配置" name="page">
           <page-config />
@@ -18,6 +51,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import PageConfig from './PageConfig';
 import CommonStyle from './CommonStyle';
 import ComponentAttr from './ComponentAttr';
@@ -35,6 +69,9 @@ export default {
     return {
       activeName: 'page',
     };
+  },
+  computed: {
+    ...mapGetters(['selectComponent']),
   },
 };
 </script>
@@ -103,6 +140,11 @@ export default {
   }
   .config-data {
     display: none;
+  }
+  .config-tip {
+    padding: 10px;
+    font-size: 13px;
+    color: #666666;
   }
 }
 </style>

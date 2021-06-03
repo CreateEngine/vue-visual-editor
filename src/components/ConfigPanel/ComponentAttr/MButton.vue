@@ -18,7 +18,7 @@
 
 <script>
 export default {
-  name: 'MText',
+  name: 'MButton',
   props: {
     item: {
       type: Object,
