@@ -6,21 +6,23 @@
       :justify="item.options.justify"
       :align="item.options.align"
     >
-      <el-col
-        :span="24"
-        class="layout-col"
-        v-for="col in item.options.columns"
-        :key="col"
-      >
-        <div class="layout-col-list" />
-      </el-col>
+      <l-grid-col
+        v-for="(element, index) in item.options.columns"
+        :key="index"
+        :item="element"
+      />
     </el-row>
   </div>
 </template>
 
 <script>
+import LGridCol from "./LGridCol";
+
 export default {
   name: "LGrid",
+  components: {
+    LGridCol,
+  },
   props: {
     item: {
       type: Object,

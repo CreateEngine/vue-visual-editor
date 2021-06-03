@@ -29,24 +29,20 @@
         >
           <render-item :item="element" />
           <div
-            v-if="selectComponent.renderId == element.renderId"
+            v-if="selectComponent.renderId === element.renderId"
             class="component-view-action"
           >
             <i
               class="icon iconfont iconshanchu"
-              v-if="selectComponent.name === 'LGrid'"
-              @click.stop="addLayoutCol()"
-            />
-            <i
-              class="icon iconfont iconshanchu"
               @click.stop="deleteComponentList(index)"
+              title="删除组件"
             />
           </div>
           <div
             v-if="selectComponent.renderId == element.renderId"
             class="component-view-drag"
           >
-            <i class="icon iconfont iconyidong" />
+            <i class="icon iconfont iconyidong" title="移动组件"/>
           </div>
         </div>
       </transition-group>
@@ -94,15 +90,6 @@ export default {
     setSelectComponent(item) {
       this.SET_SELECTCOMPONENT(item);
       this.ADDHISTORY();
-    },
-    addLayoutCol() {
-      const tempSelectComponent = JSON.parse(
-        JSON.stringify(this.selectComponent)
-      );
-      tempSelectComponent.options.columns =
-        tempSelectComponent.options.columns + 1;
-      this.SET_SELECTCOMPONENT(tempSelectComponent);
-      this.MODIFYCOMPONENT(tempSelectComponent);
     },
   },
 };

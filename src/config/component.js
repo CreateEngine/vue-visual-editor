@@ -154,7 +154,10 @@ export const layoutComponent = [
     options: {
       datas: [],
       gutter:0,
-      columns:1,
+      columns:[{
+        span: 24,
+        children: []
+      }]
     },
   },
 ];

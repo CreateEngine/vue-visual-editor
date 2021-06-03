@@ -6,6 +6,13 @@
   "description": "页面生成器",
   "glyphs": [
     {
+      "icon_id": "4360998",
+      "name": "新增",
+      "font_class": "xinzeng",
+      "unicode": "e600",
+      "unicode_decimal": 58880
+    },
+    {
       "icon_id": "1200199",
       "name": "文字",
       "font_class": "wenzi",

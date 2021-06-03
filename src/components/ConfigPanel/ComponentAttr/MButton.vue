@@ -18,7 +18,7 @@
 
 <script>
 export default {
-  name: 'MButton',
+  name: "MButton",
   props: {
     item: {
       type: Object,
