@@ -153,6 +153,8 @@ export const layoutComponent = [
     name: "LGrid",
     options: {
       datas: [],
+      gutter:0,
+      columns:1,
     },
   },
 ];

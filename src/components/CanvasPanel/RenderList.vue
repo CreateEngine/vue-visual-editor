@@ -34,6 +34,11 @@
           >
             <i
               class="icon iconfont iconshanchu"
+              v-if="selectComponent.name === 'LGrid'"
+              @click.stop="addLayoutCol()"
+            />
+            <i
+              class="icon iconfont iconshanchu"
               @click.stop="deleteComponentList(index)"
             />
           </div>
@@ -84,10 +89,20 @@ export default {
       "SET_SELECTCOMPONENT",
       "DELETECOMPONENT",
       "ADDHISTORY",
+      "MODIFYCOMPONENT",
     ]),
     setSelectComponent(item) {
       this.SET_SELECTCOMPONENT(item);
       this.ADDHISTORY();
+    },
+    addLayoutCol() {
+      const tempSelectComponent = JSON.parse(
+        JSON.stringify(this.selectComponent)
+      );
+      tempSelectComponent.options.columns =
+        tempSelectComponent.options.columns + 1;
+      this.SET_SELECTCOMPONENT(tempSelectComponent);
+      this.MODIFYCOMPONENT(tempSelectComponent);
     },
   },
 };
@@ -118,7 +133,7 @@ export default {
   }
 
   .darg-item {
-    padding-bottom: 18px;
+    // padding-bottom: 18px;
     position: relative;
     border: 1px dashed hsla(0, 0%, 66.7%, 0.7);
     background-color: rgba(236, 245, 255, 0.3);

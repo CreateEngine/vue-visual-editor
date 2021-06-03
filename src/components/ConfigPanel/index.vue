@@ -7,7 +7,7 @@
             请选择需要配置的组件
           </div>
           <div
-            v-if="['businessComponent','layoutComponent'].includes(selectComponent.category)"
+            v-if="['businessComponent'].includes(selectComponent.category)"
             class="config-tip"
           >
             目前组件不支持属性修改
@@ -15,7 +15,7 @@
           <component-attr
             v-if="
               selectComponent.category &&
-                !['businessComponent','layoutComponent'].includes(selectComponent.category)
+                !['businessComponent'].includes(selectComponent.category)
             "
           />
           <common-style
