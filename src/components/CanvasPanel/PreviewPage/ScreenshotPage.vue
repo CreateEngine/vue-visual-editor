@@ -1,8 +1,5 @@
 <template>
   <div class="preview-inner-box" :style="previewStyle">
-    <div class="preview-top">
-      <img src="../images/preview-bg-top.png">
-    </div>
     <div class="preview-content">
       <div
         v-for="item in canvasComponentList"
@@ -11,9 +8,6 @@
       >
         <render-item :item="item" :support="['events']" />
       </div>
-    </div>
-    <div class="preview-bottom">
-      <img src="../images/preview-bg-bottom.png">
     </div>
   </div>
 </template>
@@ -55,7 +49,7 @@ export default {
     height: 429px;
     overflow: auto;
     padding: 0 5px;
-    padding-top: 39px;
+    // padding-top: 39px;
     /*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
     &::-webkit-scrollbar {
       width: 7px;
