@@ -29,10 +29,17 @@
         <i class="icon iconfont iconyulan" />
         <span>预览</span>
       </button>
-      <button
+     <button
         class="tool-item"
-        :class="{ disabled: currentHistoryStep === historyList.length - 1 }"
-        :disabled="currentHistoryStep === historyList.length - 1"
+        :class="{
+          disabled:
+            currentHistoryStep === historyList.length - 1 ||
+            historyList.length === 0
+        }"
+        :disabled="
+          currentHistoryStep === historyList.length - 1 ||
+            historyList.length === 0
+        "
         @click="revoke"
       >
         <i class="icon iconfont iconchexiao" />
