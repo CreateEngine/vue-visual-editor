@@ -37,17 +37,4 @@ export default {
   padding: 5px;
   overflow: hidden;
 }
-.layout-col {
-  padding: 5px;
-  position: relative;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  border: 1px dashed #999;
-  .layout-col-list {
-    min-height: 50px;
-    min-width: 50px;
-    border: 2px inset rgba(0, 0, 0, 0.1);
-    background: #fff;
-  }
-}
 </style>

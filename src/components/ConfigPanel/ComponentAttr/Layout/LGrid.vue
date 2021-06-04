@@ -109,16 +109,17 @@ export default {
     ...mapGetters(["selectComponent"]),
   },
   methods: {
-    ...mapMutations("editor", ["SET_STYLECONFIG"]),
+    ...mapMutations("editor", ["SET_STYLECONFIG", "SET_SELECTCOMPONENT"]),
     setStyleConfig(config) {
       this.SET_STYLECONFIG(config);
     },
     handleRemoveColumn(index) {
       this.item.options.columns.splice(index, 1);
+      this.SET_SELECTCOMPONENT(this.item);
     },
     handleAddColumn() {
       this.item.options.columns.push({
-        span: 0,
+        span: 1,
         children: [],
       });
     },

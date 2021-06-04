@@ -7,7 +7,7 @@
       拖动左侧组件生成页面
     </div>
     <draggable
-      id="componentsList"
+      id="componentsLists"
       :list="canvasComponentList"
       class="components-list"
       group="component"

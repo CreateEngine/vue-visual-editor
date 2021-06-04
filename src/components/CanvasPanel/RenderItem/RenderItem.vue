@@ -22,7 +22,7 @@ import MImage from "./lists/basic/MImage";
 import MButton from "./lists/basic/MButton";
 import MSlider from "./lists/basic/MSlider";
 import LGrid from "./lists/layout/LGrid";
-
+console.log(MSlider,LGrid)
 export default {
   name: "RenderItem",
   components: {

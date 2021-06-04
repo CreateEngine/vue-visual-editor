@@ -11,20 +11,22 @@
       @start="handleMoveStart"
     >
       <li v-for="item in datas" :key="item.name">
-        <a><i class="icon iconfont" :class="item.icon" /><span>{{
-          componentNameMap[item.name]
-        }}</span></a>
+        <a
+          ><i class="icon iconfont" :class="item.icon" /><span>{{
+            componentNameMap[item.name]
+          }}</span></a
+        >
       </li>
     </draggable>
   </div>
 </template>
 <script>
-import { mapGetters } from 'vuex';
-import Draggable from 'vuedraggable';
-import { category } from '../../config/component.js';
+import { mapGetters } from "vuex";
+import Draggable from "vuedraggable";
+import { category } from "../../config/component.js";
 
 export default {
-  name: 'CategoryWidget',
+  name: "CategoryWidget",
   components: {
     Draggable,
   },
@@ -52,28 +54,38 @@ export default {
     categoryTitle() {
       return category[this.category];
     },
-    ...mapGetters(['canvasComponentList']),
+    ...mapGetters(["canvasComponentList"]),
   },
   methods: {
-    handleMoveEnd(evt) {
-      console.log('end', evt, this.canvasComponentList);
+    handleMoveEnd() {
+      // console.log("end", evt.to.parentNode.id, this.canvasComponentList);
       if (this.isClone === false) {
-        this.$message.error('业务组件不可重复拖拽！');
+        this.$message.error("业务组件不可重复拖拽！");
         this.isClone = true;
       }
     },
     handleMoveStart({ oldIndex }) {
       this.selectDragComponent = this.datas[oldIndex];
     },
-    handleMove() {
-      this.canvasComponentList.forEach(item => {
+    handleMove(evt) {
+      // 布局组件不可嵌套
+      if (
+        evt.to.parentNode.id === "childrenComponentList" &&
+        this.selectDragComponent.name === "LGrid"
+      ) {
+        this.isClone = false;
+      } else {
+        this.isClone = true;
+      }
+      this.canvasComponentList.forEach((item) => {
         if (
           item.name === this.selectDragComponent.name &&
-          item.category === 'businessComponent'
+          item.category === "businessComponent"
         ) {
           this.isClone = false;
         }
       });
+
       return this.isClone;
     },
     cloneComponent(item) {
@@ -82,7 +94,7 @@ export default {
           ...item,
           ...{
             category: this.category,
-            renderId: item.name + '-' + Date.now(),
+            renderId: item.name + "-" + Date.now(),
           },
         })
       );
@@ -149,7 +161,7 @@ export default {
   height: 3px;
   box-sizing: border-box;
   font-size: 0;
-  content: '';
+  content: "";
   overflow: hidden;
   padding: 0;
 }

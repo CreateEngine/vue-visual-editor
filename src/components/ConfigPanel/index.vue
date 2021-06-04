@@ -111,16 +111,12 @@ export default {
     .config-item {
       .config-tab {
         border-bottom: 2px solid #409eff;
-
         .config-tab-item {
           width: 50%;
           padding: 8px 12px;
           font-size: 14px;
           margin-bottom: -2px;
           text-align: center;
-          // &.selected {
-          //   border-bottom: 2px solid #409eff;
-          // }
         }
       }
       ul {
