@@ -12,17 +12,21 @@
   </div>
 </template>
 <script>
-import RenderItem from './../RenderItem';
+import RenderItem from "./../RenderItem";
 
 export default {
-  name: 'PreviewPageIframe',
+  name: "PreviewPageIframe",
   components: {
     RenderItem,
   },
   data() {
     return {
-      globalConfig: parent._$store.state.editor.globalConfig,
-      canvasComponentList: parent._$store.state.editor.canvasComponentList,
+      globalConfig: JSON.parse(
+        JSON.stringify(parent._$store.state.editor.globalConfig)
+      ),
+      canvasComponentList: JSON.parse(
+        JSON.stringify(parent._$store.state.editor.canvasComponentList)
+      ),
     };
   },
   computed: {
