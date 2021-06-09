@@ -20,6 +20,12 @@
         category="businessComponent"
       />
        <category-widget
+        :datas="chartComponent"
+        :canvas-component-list="canvasComponentList"
+        :component-name-map="componentNameMap"
+        category="chartComponent"
+      />
+       <category-widget
         :datas="layoutComponent"
         :canvas-component-list="canvasComponentList"
         :component-name-map="componentNameMap"
@@ -34,6 +40,7 @@ import {
   functionalComponent,
   businessComponent,
   layoutComponent,
+  chartComponent,
   componentNameMap,
 } from "../../config/component.js";
 import CategoryWidget from "./CategoryWidget.vue";
@@ -57,6 +64,7 @@ export default {
       functionalComponent,
       businessComponent,
       layoutComponent,
+      chartComponent,
       componentNameMap,
     };
   },

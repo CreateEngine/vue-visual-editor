@@ -7,7 +7,11 @@
             请选择需要配置的组件
           </div>
           <div
-            v-if="['businessComponent'].includes(selectComponent.category)"
+            v-if="
+              ['businessComponent', 'chartComponent'].includes(
+                selectComponent.category
+              )
+            "
             class="config-tip"
           >
             目前组件不支持属性修改
@@ -15,13 +19,18 @@
           <component-attr
             v-if="
               selectComponent.category &&
-                !['businessComponent'].includes(selectComponent.category)
+                !['businessComponent', 'chartComponent'].includes(
+                  selectComponent.category
+                )
             "
           />
           <common-style
             v-if="
               selectComponent.category &&
-                !['businessComponent','layoutComponent'].includes(selectComponent.category)
+                ![
+                  'businessComponent',
+                  'layoutComponent',
+                ].includes(selectComponent.category)
             "
           />
         </el-tab-pane>
@@ -30,7 +39,12 @@
             请选择需要绑定事件的组件
           </div>
           <div
-            v-if="['businessComponent','layoutComponent'].includes(selectComponent.category)"
+            v-if="
+              [
+                'businessComponent',
+                'layoutComponent',
+              ].includes(selectComponent.category)
+            "
             class="config-tip"
           >
             目前组件不支持事件绑定
@@ -38,7 +52,10 @@
           <event-config
             v-if="
               selectComponent.category &&
-                !['businessComponent','layoutComponent'].includes(selectComponent.category)
+                ![
+                  'businessComponent',
+                  'layoutComponent',
+                ].includes(selectComponent.category)
             "
           />
         </el-tab-pane>
@@ -51,14 +68,14 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
-import PageConfig from './PageConfig';
-import CommonStyle from './CommonStyle';
-import ComponentAttr from './ComponentAttr';
-import EventConfig from './EventConfig';
+import { mapGetters } from "vuex";
+import PageConfig from "./PageConfig";
+import CommonStyle from "./CommonStyle";
+import ComponentAttr from "./ComponentAttr";
+import EventConfig from "./EventConfig";
 
 export default {
-  name: 'ConfigPanel',
+  name: "ConfigPanel",
   components: {
     PageConfig,
     CommonStyle,
@@ -67,11 +84,11 @@ export default {
   },
   data() {
     return {
-      activeName: 'page',
+      activeName: "page",
     };
   },
   computed: {
-    ...mapGetters(['selectComponent']),
+    ...mapGetters(["selectComponent"]),
   },
 };
 </script>
