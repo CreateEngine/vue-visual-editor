@@ -78,5 +78,17 @@ export default {
   .preview-item {
     padding: 5px 0;
   }
+  /deep/ .layout-col {
+    position: inherit;
+    padding: 0;
+    border: none;
+    min-width: auto;
+    min-height: auto;
+    .layout-col-list {
+      background: transparent;
+      border: none;
+      height: auto;
+    }
+  }
 }
 </style>

@@ -9,17 +9,15 @@
           <img
             :src="listItem.url"
             class="slider-image"
-            :style="imgStyle"
             crossorigin="anonymous"
-          >
+          />
         </a>
         <img
           v-else
           :src="listItem.url"
           class="slider-image"
-          :style="imgStyle"
           crossorigin="anonymous"
-        >
+        />
       </el-carousel-item>
     </el-carousel>
   </div>
@@ -27,12 +25,12 @@
 
 <script>
 export default {
-  name: 'MSlider',
+  name: "MSlider",
   props: {
     type: {
       type: String,
       default: () => {
-        return 'canvas';
+        return "canvas";
       },
     },
     item: {
@@ -42,15 +40,13 @@ export default {
   },
   computed: {
     picHeight() {
-      if (this.type === 'preview') {
-        return '130px';
+      if (this.item.options.commonStyle && this.item.options.commonStyle.height) {
+        return this.item.options.commonStyle.height + "px";
       }
-      return '180px';
-    },
-    imgStyle() {
-      return {
-        height: this.picHeight,
-      };
+      if (this.type === "preview") {
+        return "130px";
+      }
+      return "180px";
     },
   },
 };
@@ -60,14 +56,14 @@ export default {
 .m-slider {
   white-space: normal;
   word-wrap: break-word;
-  /deep/ .el-carousel__button{
+  /deep/ .el-carousel__button {
     width: 4px;
     height: 4px;
     border-radius: 50%;
   }
   .slider-image {
     width: 100%;
-    height: 170px;
+    height: 100%;
   }
 }
 </style>
