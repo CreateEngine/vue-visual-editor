@@ -22,6 +22,9 @@ import MImage from "./lists/basic/MImage";
 import MButton from "./lists/basic/MButton";
 import MSlider from "./lists/basic/MSlider";
 import LGrid from "./lists/layout/LGrid";
+import ELine from "./lists/chart/ELine";
+import EBar from "./lists/chart/EBar";
+import EPie from "./lists/chart/EPie";
 
 export default {
   name: "RenderItem",
@@ -36,6 +39,9 @@ export default {
     MButton,
     MSlider,
     LGrid,
+    ELine,
+    EBar,
+    EPie,
   },
   props: {
     type: {

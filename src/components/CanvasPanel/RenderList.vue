@@ -71,13 +71,11 @@ export default {
       if (evt.added) {
         this.setSelectComponent({
           ...evt.added.element,
-          ...{ index: evt.added.newIndex },
         });
       }
       if (evt.moved) {
         this.setSelectComponent({
           ...evt.moved.element,
-          ...{ index: evt.moved.newIndex },
         });
       }
     },

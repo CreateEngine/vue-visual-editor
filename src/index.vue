@@ -55,7 +55,6 @@ export default {
       this.SET_COMPONENTLIST(this.editPage.renderJson);
       this.setSelectComponent({
         ...this.canvasComponentList[0],
-        ...{ index: 0 },
       });
     },
     setSelectComponent(item) {

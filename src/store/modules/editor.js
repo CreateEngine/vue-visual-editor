@@ -43,19 +43,45 @@ const mutations = {
       } else {
         this.commit('editor/SET_SELECTCOMPONENT', {
           ...state.canvasComponentList[index - 1],
-          ...{ index: index - 1 },
         });
       }
     } else {
       this.commit('editor/SET_SELECTCOMPONENT', {
         ...state.canvasComponentList[index + 1],
-        ...{ index: index + 1 },
       });
     }
     this.commit('editor/ADDHISTORY');
     Vue.nextTick(() => {
       state.canvasComponentList.splice(index, 1);
     });
+  },
+  DELETECHILDRENCOMPONENT(state, index) {
+    state.canvasComponentList.forEach(item => {
+      item.options.columns.forEach(childItem => {
+        childItem.children.forEach(childrenComponent => {
+          if (childrenComponent.renderId === state.selectComponent.renderId) {
+            console.log(childrenComponent, index)
+          }
+        })
+      })
+    })
+    // if (state.canvasComponentList.length - 1 === index) {
+    //   if (index === 0) {
+    //     this.commit('editor/SET_SELECTCOMPONENT', {});
+    //   } else {
+    //     this.commit('editor/SET_SELECTCOMPONENT', {
+    //       ...state.canvasComponentList[index - 1],
+    //     });
+    //   }
+    // } else {
+    //   this.commit('editor/SET_SELECTCOMPONENT', {
+    //     ...state.canvasComponentList[index + 1],
+    //   });
+    // }
+    // this.commit('editor/ADDHISTORY');
+    // Vue.nextTick(() => {
+    //   state.canvasComponentList.splice(index, 1);
+    // });
   },
   MODIFYCOMPONENT(state, item) {
     const newItem = Object.assign({}, item);

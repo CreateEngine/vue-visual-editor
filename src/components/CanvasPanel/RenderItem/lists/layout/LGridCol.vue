@@ -63,7 +63,7 @@ export default {
   },
   methods: {
     deleteComponentList(index) {
-      this.DELETECOMPONENT(index);
+      this.DELETECHILDRENCOMPONENT(index);
     },
     changeComponentList(evt) {
       if (evt.added) {
@@ -81,7 +81,7 @@ export default {
     },
     ...mapMutations("editor", [
       "SET_SELECTCOMPONENT",
-      "DELETECOMPONENT",
+      "DELETECHILDRENCOMPONENT",
       "ADDHISTORY",
       "MODIFYCOMPONENT",
     ]),
