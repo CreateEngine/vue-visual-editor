@@ -1,24 +1,26 @@
-import Vue from 'vue';
-import { editorConfig } from '../../config/editorConfig';
+import Vue from "vue";
+import { editorConfig } from "../../config/editorConfig";
 
 const state = {
   unitType: [
-    { value: 'px', label: 'px' },
-    { value: 'vw', label: 'vw' },
+    { value: "px", label: "px" },
+    { value: "vw", label: "vw" },
   ],
   globalConfig: {
     style: {
-      backgroundColor: '',
-      backgroundImage: '',
+      backgroundColor: "",
+      backgroundImage: "",
     },
   },
   selectComponent: {},
   canvasComponentList: [],
   historyList: [],
-  eventTypeList: [{
-    label: '跳转链接',
-    value: 'link',
-  }],
+  eventTypeList: [
+    {
+      label: "跳转链接",
+      value: "link",
+    },
+  ],
 };
 const mutations = {
   SET_GLOBALCONFIG: (state, globalConfig) => {
@@ -28,7 +30,10 @@ const mutations = {
     state.globalConfig.style = { ...state.globalConfig.style, ...config };
   },
   SET_FONTCONFIG: (state, config) => {
-    state.globalConfig.style.font = { ...state.globalConfig.style.font, ...config };
+    state.globalConfig.style.font = {
+      ...state.globalConfig.style.font,
+      ...config,
+    };
   },
   SET_SELECTCOMPONENT: (state, component) => {
     state.selectComponent = component;
@@ -39,50 +44,57 @@ const mutations = {
   DELETECOMPONENT(state, index) {
     if (state.canvasComponentList.length - 1 === index) {
       if (index === 0) {
-        this.commit('editor/SET_SELECTCOMPONENT', {});
+        this.commit("editor/SET_SELECTCOMPONENT", {});
       } else {
-        this.commit('editor/SET_SELECTCOMPONENT', {
+        this.commit("editor/SET_SELECTCOMPONENT", {
           ...state.canvasComponentList[index - 1],
         });
       }
     } else {
-      this.commit('editor/SET_SELECTCOMPONENT', {
+      this.commit("editor/SET_SELECTCOMPONENT", {
         ...state.canvasComponentList[index + 1],
       });
     }
-    this.commit('editor/ADDHISTORY');
+    this.commit("editor/ADDHISTORY");
     Vue.nextTick(() => {
       state.canvasComponentList.splice(index, 1);
     });
   },
-  DELETECHILDRENCOMPONENT(state, index) {
-    state.canvasComponentList.forEach(item => {
-      item.options.columns.forEach(childItem => {
-        childItem.children.forEach(childrenComponent => {
-          if (childrenComponent.renderId === state.selectComponent.renderId) {
-            Vue.nextTick(() => {
-              childItem.children.splice(index, 1);
-              this.commit('editor/SET_SELECTCOMPONENT', {
-                ...state.canvasComponentList[index],
-              });
-              this.commit('editor/ADDHISTORY');
-            });
-          }
-        })
-      })
-    })
-
+  DELETECHILDRENCOMPONENT(state, { index, childComponent }) {
+    console.log(childComponent, index);
+    Vue.nextTick(() => {
+      childComponent.splice(index, 1);
+      // this.commit('editor/SET_SELECTCOMPONENT', {
+      //   ...state.selectComponent,
+      // });
+      this.commit("editor/ADDHISTORY");
+    });
+    // state.canvasComponentList.forEach(item => {
+    //   item.options.columns.forEach(childItem => {
+    //     childItem.children.forEach(childrenComponent => {
+    //       if (childrenComponent.renderId === state.selectComponent.renderId) {
+    //         Vue.nextTick(() => {
+    //           childItem.children.splice(index, 1);
+    //           this.commit('editor/SET_SELECTCOMPONENT', {
+    //             ...state.canvasComponentList[index],
+    //           });
+    //           this.commit('editor/ADDHISTORY');
+    //         });
+    //       }
+    //     })
+    //   })
+    // })
   },
   MODIFYCOMPONENT(state, item) {
     const newItem = Object.assign({}, item);
     const tempItem = {};
     for (const key in newItem) {
-      if (key !== 'index') {
+      if (key !== "index") {
         tempItem[key] = newItem[key];
       }
     }
     state.canvasComponentList[newItem.index] = tempItem;
-    this.commit('editor/ADDHISTORY');
+    this.commit("editor/ADDHISTORY");
   },
   ADDHISTORY(state) {
     const selectComponentTemp = JSON.stringify(state.selectComponent);
@@ -97,10 +109,12 @@ const mutations = {
     state.historyList.push(historyItem);
   },
   USEHISTORY(state, index) {
-    this.commit('editor/SET_COMPONENTLIST',
+    this.commit(
+      "editor/SET_COMPONENTLIST",
       JSON.parse(state.historyList[index].canvasComponentList)
     );
-    this.commit('editor/SET_SELECTCOMPONENT',
+    this.commit(
+      "editor/SET_SELECTCOMPONENT",
       JSON.parse(state.historyList[index].selectComponent)
     );
   },

@@ -16,7 +16,9 @@
             :key="element.renderId"
             class="darg-item"
             :class="{ active: selectComponent.renderId === element.renderId }"
-            @click.stop="setSelectComponent({ ...element, ...{ index: index } })"
+            @click.stop="
+              setSelectComponent({ ...element, ...{ index: index } })
+            "
           >
             <render-item :item="element" />
             <div
@@ -25,7 +27,7 @@
             >
               <i
                 class="icon iconfont iconshanchu"
-                @click.stop="deleteComponentList(index)"
+                @click.stop="deleteComponentList(index, item.children)"
               />
             </div>
             <div
@@ -62,8 +64,8 @@ export default {
     ...mapGetters(["selectComponent", "canvasComponentList", "historyList"]),
   },
   methods: {
-    deleteComponentList(index) {
-      this.DELETECHILDRENCOMPONENT(index);
+    deleteComponentList(index, childComponent) {
+      this.DELETECHILDRENCOMPONENT({ index, childComponent });
     },
     changeComponentList(evt) {
       if (evt.added) {
