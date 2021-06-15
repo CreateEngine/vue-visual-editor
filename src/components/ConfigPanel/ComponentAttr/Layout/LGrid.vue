@@ -42,6 +42,7 @@
               style="width: 100px;"
               type="number"
               v-model.number="col.span"
+              @change="changeSpan"
             ></el-input>
 
             <el-button
@@ -109,19 +110,29 @@ export default {
     ...mapGetters(["selectComponent"]),
   },
   methods: {
-    ...mapMutations("editor", ["SET_STYLECONFIG", "SET_SELECTCOMPONENT"]),
+    ...mapMutations("editor", [
+      "SET_STYLECONFIG",
+      "SET_SELECTCOMPONENT",
+      "ADDHISTORY",
+    ]),
     setStyleConfig(config) {
       this.SET_STYLECONFIG(config);
+      this.ADDHISTORY();
     },
     handleRemoveColumn(index) {
       this.item.options.columns.splice(index, 1);
       this.SET_SELECTCOMPONENT(this.item);
+      this.ADDHISTORY();
     },
     handleAddColumn() {
       this.item.options.columns.push({
         span: 1,
         children: [],
       });
+      this.ADDHISTORY();
+    },
+    changeSpan() {
+      this.ADDHISTORY();
     },
   },
 };
