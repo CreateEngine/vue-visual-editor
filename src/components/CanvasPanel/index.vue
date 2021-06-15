@@ -3,27 +3,19 @@
     <render-list
       id="renderCanvas"
       :canvas-component-list="canvasComponentList"
-      :select-component="selectComponent"
-      @setSelectComponent="setSelectComponent"
       @deleteComponentList="deleteComponentList"
     />
   </div>
 </template>
 <script>
-import RenderList from './RenderList.vue';
+import RenderList from "./RenderList.vue";
 
 export default {
-  name: 'CanvasPanel',
+  name: "CanvasPanel",
   components: {
     RenderList,
   },
   props: {
-    selectComponent: {
-      type: Object,
-      default: () => {
-        return {};
-      },
-    },
     canvasComponentList: {
       type: Array,
       default: () => {
@@ -32,11 +24,8 @@ export default {
     },
   },
   methods: {
-    setSelectComponent(item) {
-      this.$emit('setSelectComponent', item);
-    },
     deleteComponentList(index) {
-      this.$emit('deleteComponentList', index);
+      this.$emit("deleteComponentList", index);
     },
   },
 };

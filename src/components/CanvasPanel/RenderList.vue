@@ -7,7 +7,7 @@
       拖动左侧组件生成页面
     </div>
     <draggable
-      id="componentsList"
+      id="componentsLists"
       :list="canvasComponentList"
       class="components-list"
       group="component"
@@ -21,24 +21,28 @@
           v-for="(element, index) in canvasComponentList"
           :key="element.renderId"
           class="darg-item"
-          :class="{ active: selectComponent.renderId === element.renderId }"
+          :class="{
+            active: selectComponent.renderId === element.renderId,
+            'component-grid': selectComponent.category === 'layoutComponent',
+          }"
           @click="setSelectComponent({ ...element, ...{ index: index } })"
         >
           <render-item :item="element" />
           <div
-            v-if="selectComponent.renderId == element.renderId"
+            v-if="selectComponent.renderId === element.renderId"
             class="component-view-action"
           >
             <i
               class="icon iconfont iconshanchu"
               @click.stop="deleteComponentList(index)"
+              title="删除组件"
             />
           </div>
           <div
             v-if="selectComponent.renderId == element.renderId"
             class="component-view-drag"
           >
-            <i class="icon iconfont iconyidong" />
+            <i class="icon iconfont iconyidong" title="移动组件"/>
           </div>
         </div>
       </transition-group>
@@ -46,49 +50,44 @@
   </div>
 </template>
 <script>
-import draggable from 'vuedraggable';
-import RenderItem from './RenderItem';
+import { mapGetters, mapMutations } from "vuex";
+import draggable from "vuedraggable";
+import RenderItem from "./RenderItem";
+
 export default {
-  name: 'CanvasComponent',
+  name: "CanvasComponent",
   components: {
     draggable,
     RenderItem,
   },
-  props: {
-    selectComponent: {
-      type: Object,
-      default: () => {
-        return {};
-      },
-    },
-    canvasComponentList: {
-      type: Array,
-      default: () => {
-        return [];
-      },
-    },
+  computed: {
+    ...mapGetters(["selectComponent", "canvasComponentList", "historyList"]),
   },
   methods: {
     deleteComponentList(index) {
-      this.$emit('deleteComponentList', index);
+      this.DELETECOMPONENT(index);
     },
     changeComponentList(evt) {
       if (evt.added) {
         this.setSelectComponent({
           ...evt.added.element,
-          ...{ index: evt.added.newIndex },
         });
       }
       if (evt.moved) {
         this.setSelectComponent({
           ...evt.moved.element,
-          ...{ index: evt.moved.newIndex },
         });
       }
-      console.log(evt);
     },
+    ...mapMutations("editor", [
+      "SET_SELECTCOMPONENT",
+      "DELETECOMPONENT",
+      "ADDHISTORY",
+      "MODIFYCOMPONENT",
+    ]),
     setSelectComponent(item) {
-      this.$emit('setSelectComponent', item);
+      this.SET_SELECTCOMPONENT(item);
+      this.ADDHISTORY();
     },
   },
 };
@@ -114,12 +113,12 @@ export default {
       background: #f2f2f2;
       border: 1px dashed #999;
       margin: 10px;
-      min-height: calc(100vh - 140px);
+      min-height: calc(100vh - 130px);
     }
   }
 
   .darg-item {
-    padding-bottom: 18px;
+    // padding-bottom: 18px;
     position: relative;
     border: 1px dashed hsla(0, 0%, 66.7%, 0.7);
     background-color: rgba(236, 245, 255, 0.3);
@@ -140,7 +139,7 @@ export default {
       height: 3px;
       box-sizing: border-box;
       font-size: 0;
-      content: '';
+      content: "";
       overflow: hidden;
       padding: 0;
     }
@@ -175,6 +174,23 @@ export default {
         margin: 0 5px;
         cursor: pointer;
         cursor: move;
+      }
+    }
+    &.component-grid {
+      &.active {
+        outline: 2px solid #e6a23c;
+        border: 1px solid #e6a23c;
+      }
+      &:hover {
+        background: #ecf5ff;
+        outline: 1px solid #e6a23c;
+        outline-offset: 0px;
+      }
+      .component-view-action {
+        background: #e6a23c;
+      }
+      .component-view-drag {
+        background: #e6a23c;
       }
     }
   }
