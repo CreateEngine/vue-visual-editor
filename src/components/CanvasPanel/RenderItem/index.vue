@@ -12,37 +12,9 @@
   </div>
 </template>
 <script>
-import Banner from "./lists/business/Banner";
-import Announcement from "./lists/business/Announcement";
-import FunctionMenu from "./lists/business/FunctionMenu";
-import TabList from "./lists/business/TabList";
-import MDivider from "./lists/basic/MDivider";
-import MText from "./lists/basic/MText";
-import MImage from "./lists/basic/MImage";
-import MButton from "./lists/basic/MButton";
-import MSlider from "./lists/basic/MSlider";
-import LGrid from "./lists/layout/LGrid";
-import ELine from "./lists/chart/ELine";
-import EBar from "./lists/chart/EBar";
-import EPie from "./lists/chart/EPie";
-
+// 组件自动注册在main.js文件实现
 export default {
   name: "RenderItem",
-  components: {
-    Banner,
-    Announcement,
-    FunctionMenu,
-    TabList,
-    MDivider,
-    MText,
-    MImage,
-    MButton,
-    MSlider,
-    LGrid,
-    ELine,
-    EBar,
-    EPie,
-  },
   props: {
     type: {
       type: String,
