@@ -29,12 +29,16 @@
         <i class="icon iconfont iconyulan" />
         <span>预览</span>
       </button>
-     <button
+      <button class="tool-item" @click="previewJSON">
+        <i class="icon iconfont iconyulan" />
+        <span>预览JSON</span>
+      </button>
+      <button
         class="tool-item"
         :class="{
           disabled:
             currentHistoryStep === historyList.length - 1 ||
-            historyList.length === 0
+            historyList.length === 0,
         }"
         :disabled="
           currentHistoryStep === historyList.length - 1 ||
@@ -92,6 +96,19 @@
       <preview-page v-if="showPreviewPage" />
     </el-dialog>
     <preview-page id="previewPage" type="screenshot" />
+    <!-- 预览JSON-->
+    <el-dialog :visible.sync="showPreviewJSON" width="530px">
+      <editor
+        ref="editorJSON"
+        v-model="contentJSON"
+        :options="editorOptions"
+        @init="editorInit"
+        lang="json"
+        theme="chrome"
+        width="500"
+        height="300"
+      ></editor>
+    </el-dialog>
   </div>
 </template>
 <script>
@@ -105,6 +122,7 @@ export default {
   name: "EditorHeader",
   components: {
     PreviewPage,
+    editor: require("vue2-ace-editor"),
   },
   props: {
     editPage: {
@@ -118,12 +136,22 @@ export default {
     return {
       showAddPage: false,
       showPreviewPage: false,
+      showPreviewJSON: false,
+      contentJSON: "",
       page: {
         name: "",
         thumbnail: "",
         renderJson: "",
       },
       currentHistoryStep: 0,
+      editorOptions: {
+        enableBasicAutocompletion: true,
+        enableSnippets: true,
+        enableLiveAutocompletion: true,
+        tabSize: 6,
+        fontSize: 14,
+        showPrintMargin: false, //去除编辑器里的竖线
+      },
     };
   },
   computed: {
@@ -275,6 +303,21 @@ export default {
       "SET_COMPONENTLIST",
       "ADDHISTORY",
     ]),
+    editorInit() {
+      require("brace/ext/language_tools"); //language extension prerequsite...
+      require("brace/mode/html");
+      require("brace/mode/javascript"); //language
+      require("brace/mode/less");
+      require("brace/theme/chrome");
+      require("brace/snippets/javascript"); //snippet
+    },
+    previewJSON() {
+      this.showPreviewJSON = true;
+      this.contentJSON = JSON.stringify(this.getRenderJSON(), null, 2);
+      this.$nextTick(() => {
+        this.$refs.editorJSON.editor.setShowFoldWidgets(true);
+      });
+    },
   },
 };
 </script>
