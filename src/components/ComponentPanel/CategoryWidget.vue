@@ -83,7 +83,7 @@ export default {
         this.isLGrid = false;
         this.isClone = true;
       }
-      this.this.isClone = true;
+      this.isClone = true;
       this.canvasComponentList.forEach((item) => {
         if (
           item.name === this.selectDragComponent.name &&
