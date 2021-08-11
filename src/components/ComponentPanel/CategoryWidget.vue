@@ -48,6 +48,7 @@ export default {
     return {
       selectDragComponent: {},
       isClone: true,
+      isLGrid: false,
     };
   },
   computed: {
@@ -57,8 +58,11 @@ export default {
     ...mapGetters(["canvasComponentList"]),
   },
   methods: {
-    handleMoveEnd() {
-      // console.log("end", evt.to.parentNode.id, this.canvasComponentList);
+    handleMoveEnd(evt) {
+      console.log("end", evt.to.parentNode.id, this.canvasComponentList);
+      if (this.isLGrid === true) {
+        return;
+      }
       if (this.isClone === false) {
         this.$message.error("业务组件不可重复拖拽！");
         this.isClone = true;
@@ -73,10 +77,13 @@ export default {
         evt.to.parentNode.id === "childrenComponentList" &&
         this.selectDragComponent.name === "LGrid"
       ) {
+        this.isLGrid = true;
         this.isClone = false;
       } else {
+        this.isLGrid = false;
         this.isClone = true;
       }
+      this.this.isClone = true;
       this.canvasComponentList.forEach((item) => {
         if (
           item.name === this.selectDragComponent.name &&
@@ -85,7 +92,6 @@ export default {
           this.isClone = false;
         }
       });
-
       return this.isClone;
     },
     cloneComponent(item) {
