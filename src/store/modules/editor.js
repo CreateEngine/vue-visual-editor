@@ -73,15 +73,23 @@ const mutations = {
       this.commit("editor/ADDHISTORY");
     });
   },
-  MODIFYCOMPONENT(state, item) {
-    const newItem = Object.assign({}, item);
-    const tempItem = {};
-    for (const key in newItem) {
-      if (key !== "index") {
-        tempItem[key] = newItem[key];
+  MODIFYCOMPONENT(state, selectComponent) {
+    const currentRenderId = selectComponent.renderId;
+    state.canvasComponentList.forEach((itemOuter,indexOuter) => {
+      if (itemOuter.renderId === currentRenderId) {
+        state.canvasComponentList[indexOuter]=selectComponent;
       }
-    }
-    state.canvasComponentList[newItem.index] = tempItem;
+      if (itemOuter.options && itemOuter.options.columns) {
+        itemOuter.options.columns.forEach((itemInner,indexInner) => {
+          itemInner.children.forEach((item,index) => {
+            if (item.renderId === currentRenderId) {
+              state.canvasComponentList[indexOuter].options.columns[indexInner].children[index]=selectComponent;
+            }
+          });
+        });
+      }
+    });
+    this.commit('editor/SET_SELECTCOMPONENT',selectComponent);
     this.commit("editor/ADDHISTORY");
   },
   ADDHISTORY(state) {

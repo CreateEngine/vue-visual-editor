@@ -33,8 +33,7 @@
               <span
                 class="events-item-btn"
                 @click.stop.prevent="deleteEvent(index)"
-              ><i
-                class="el-icon-delete"
+                ><i class="el-icon-delete"
               /></span>
             </div>
           </template>
@@ -58,56 +57,72 @@
   </div>
 </template>
 <script>
-import { mapGetters, mapMutations } from 'vuex';
+import { mapGetters, mapMutations } from "vuex";
 
 export default {
-  name: 'EventConfig',
+  name: "EventConfig",
   filters: {
     /**
      * 根据value获取label
      * @param value
      * @param list 对象列表
      */
-    getLabelText(value, list, label = 'label') {
-      const data = list.find(v => v.value === value);
+    getLabelText(value, list, label = "label") {
+      const data = list.find((v) => v.value === value);
       if (data) {
         return data[label];
       } else {
-        return '';
+        return "";
       }
     },
   },
   computed: {
-    ...mapGetters(['selectComponent', 'eventTypeList', 'canvasComponentList']),
+    ...mapGetters(["selectComponent", "eventTypeList", "canvasComponentList"]),
   },
   methods: {
-    ...mapMutations('editor', ['SET_SELECTCOMPONENT', 'MODIFYCOMPONENT']),
+    ...mapMutations("editor", ["SET_SELECTCOMPONENT", "MODIFYCOMPONENT"]),
     /**
      * 添加事件
      * @param type 事件名称
      */
     addEvent(type) {
-      const selectComponent = this.selectComponent;
+      const currentRenderId = this.selectComponent.renderId;
+      this.canvasComponentList.forEach((itemOuter) => {
+        if (itemOuter.renderId === currentRenderId) {
+          this.addNestItemEvent(type, itemOuter);
+        }
+        if (itemOuter.options && itemOuter.options.columns) {
+          itemOuter.options.columns.forEach((itemInner) => {
+            itemInner.children.forEach((item) => {
+              if (item.renderId === currentRenderId) {
+                this.addNestItemEvent(type, item);
+              }
+            });
+          });
+        }
+      });
+    },
+    addNestItemEvent(type, item) {
       const eventDefaultData = {
         type: type,
-        url: '',
+        url: "",
       };
-      if (!selectComponent.events) {
-        selectComponent.events = [];
+      if (!item.events) {
+        item.events = [];
       }
       // 不可重复添加事件
       let isExit = false;
-      selectComponent.events.forEach(item => {
+      item.events.forEach((item) => {
         if (item.type === type) {
           isExit = true;
         }
       });
       if (isExit === true) {
-        this.$message.error('不可重复添加该事件！');
+        this.$message.error("不可重复添加该事件！");
         return;
       }
-      selectComponent.events.push(eventDefaultData);
-      this.updataComponent(selectComponent);
+      item.events.push(eventDefaultData);
+      this.updataComponent(item);
     },
     /**
      * 删除事件
@@ -119,7 +134,6 @@ export default {
       this.updataComponent(selectComponent);
     },
     updataComponent(selectComponent) {
-      this.SET_SELECTCOMPONENT(JSON.parse(JSON.stringify(selectComponent)));
       this.MODIFYCOMPONENT(JSON.parse(JSON.stringify(selectComponent)));
     },
   },
